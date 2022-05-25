@@ -32,6 +32,8 @@ export const BannerHome = () => {
                 </Text>
                 <Stack spacing={6} direction={'row'}>
                     <Button
+                        as='a'
+                        href='/signup'
                         rounded={'full'}
                         px={6}
                         colorScheme={'orange'}
