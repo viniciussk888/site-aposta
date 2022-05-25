@@ -16,9 +16,16 @@ import {
 } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { FaHamburger } from 'react-icons/fa'
+import { SignUpModal } from '../SignUpModal';
 
 export const Header = () => {
   const [isWideVersion, setIsWideVersion] = useState(true)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [path, setPath] = useState('/')
+  useEffect(() => {
+    setPath(window.location.pathname)
+  }, [path])
+
   const breakPointCheck = useBreakpointValue({
     sm: false,
     md: true,
@@ -29,8 +36,13 @@ export const Header = () => {
     setIsWideVersion(breakPointCheck)
   }, [breakPointCheck])
 
+  console.log(path)
+
+
+
   return (
     <Box>
+      <SignUpModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
       <Flex
         w='100%'
         bgGradient='linear(to-t, transparent, gray.500)'
@@ -47,7 +59,27 @@ export const Header = () => {
           </Text>
 
           <Flex display='flex' ml={10}>
-            <DesktopNav />
+            <Stack direction={'row'} alignItems='center' spacing={4}>
+              <Box>
+                <Popover trigger={'hover'} placement={'bottom-start'}>
+                  <PopoverTrigger>
+                    <Link
+                      p={2}
+                      href={path === '/signup' ? '/' : '/signup'}
+                      fontSize={'sm'}
+                      fontWeight={900}
+                      mr={4}
+                      color='white'
+                      _hover={{
+                        textDecoration: 'none',
+                        color: 'gray.100',
+                      }}>
+                      {path === '/signup' ? 'HOME' : 'CADASTRO'}
+                    </Link>
+                  </PopoverTrigger>
+                </Popover>
+              </Box>
+            </Stack>
           </Flex>
         </Flex>
 
@@ -57,6 +89,7 @@ export const Header = () => {
           direction={'row'}
           spacing={6}>
           <Button
+            onClick={() => setIsOpenModal(true)}
             fontSize={'sm'}
             fontWeight='bold'
             backgroundColor='primary.500'
@@ -70,46 +103,3 @@ export const Header = () => {
     </Box >
   );
 }
-
-const DesktopNav = () => {
-
-  return (
-    <Stack direction={'row'} alignItems='center' spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={900}
-                mr={4}
-                color='white'
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'gray.100',
-                }}>
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-          </Popover>
-        </Box>
-      ))}
-    </Stack>
-  );
-};
-
-interface NavItem {
-  label: string;
-  icon?: string;
-  href?: string;
-  index?: number;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'CADASTRO',
-    href: '#',
-  },
-];
