@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { FaHamburger } from 'react-icons/fa'
-import { SignUpModal } from '../SignUpModal';
+import { SignInModal } from '../SignInModal';
 
 export const Header = () => {
   const [isWideVersion, setIsWideVersion] = useState(true)
@@ -42,7 +42,7 @@ export const Header = () => {
 
   return (
     <Box>
-      <SignUpModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      <SignInModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
       <Flex
         w='100%'
         bgGradient='linear(to-t, transparent, gray.500)'

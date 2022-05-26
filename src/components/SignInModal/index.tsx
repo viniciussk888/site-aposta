@@ -1,7 +1,8 @@
 import { Button, FormControl, FormLabel, Heading, Input, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react"
 import React, { useEffect } from "react"
+import Router from 'next/router';
 
-export const SignUpModal = ({ isOpenModal, setIsOpenModal }) => {
+export const SignInModal = ({ isOpenModal, setIsOpenModal }) => {
 
     const initialRef = React.useRef()
 
@@ -39,7 +40,7 @@ export const SignUpModal = ({ isOpenModal, setIsOpenModal }) => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button isFullWidth backgroundColor='primary.500' colorScheme='primary.500' mr={3}>
+                        <Button onClick={()=>Router.push('/home')} isFullWidth backgroundColor='primary.500' colorScheme='primary.500' mr={3}>
                             ENTRAR
                         </Button>
                     </ModalFooter>

@@ -30,7 +30,7 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
 
 export const BannerCardsHome = () => {
     return (
-        <Box p={4}>
+        <Box p={4} paddingTop='20' paddingBottom='20'>
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
                 <Feature
                     icon={<Icon as={FcPositiveDynamic} w={10} h={10} />}
